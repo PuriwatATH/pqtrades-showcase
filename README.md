@@ -1,14 +1,18 @@
-# pqtrades-showcase
+
+---
 > ⚠️ **Notice:** This is an active showcase repository currently under documentation and refinement.  
 > If you're a recruiter or hiring manager visiting early — thank you!  
 > The platform itself is fully developed and deployed at [www.pqtrades.com](https://www.pqtrades.com),  
 > and this repo will soon include architecture diagrams, API logic, and annotated code snippets.
 
-Welcome to the official public showcase of **PQTradePlatform**, a full-stack trading simulation platform built to demonstrate scalable backend architecture, real-time infrastructure, and institutional-grade execution logic.
+---
+# PQTrades Showcase
+
+Welcome to the official public showcase of **PQTrades Platform**, a full-stack trading simulation platform built to demonstrate scalable backend architecture, real-time infrastructure, and institutional-grade execution logic.
 
 This project highlights my work as a full-stack Quant Developer with a focus on Python, trading system design, and backend-first infrastructure thinking.
 
-> 🔗 Live site: [www.pqtrades.com](https://www.pqtrades.com)
+> 🔗 Live site: [www.pqtrades.com](https://www.pqtrades.com/portfolio)
 
 ---
 
@@ -64,6 +68,27 @@ Delivered a full-stack MVP aligned to institutional-grade standards, enabling re
 ---
 
 ## 🔐 Highlighted Modules
+> ⚠️ **Notice:** This is an active showcase repository currently under documentation and refinement.  
 
-### Idempotency Middleware (Safe Re-Execution)
+---
 
+## ✅ Project Outcome
+
+Delivered a full-stack MVP aligned to institutional-grade standards, enabling real-time model testing, execution simulation, and a robust Python backend infrastructure. Demonstrates fluency in system design, modern dev workflows, and real-world quant engineering.
+
+---
+
+## ✅ Meta Checklist for Publishing PQTradePlatform
+- [x] Project Title & Role Label
+- [x] Live Site URL (pqtrades.com)
+- [x] Project Summary / Purpose
+- [x] Technologies Used (Python, Django, FastAPI, etc.)
+- [x] System Architecture Overview
+- [x] Key Features (Trading, Order Lifecycle, Real-time Pricing)
+- [x] Deployment Strategy (AWS EC2 + Optimization)
+- [x] Project Outcome (Impact, Goals Achieved)
+- [x] Skills Matrix Table (Grouped by category)
+- [ ] GitHub Project Showcase - Document, Code Snippet, System Architecture, etc.
+- [ ] Future Scope / What's Next (AI Signal Engine, Backtesting)
+- [ ] Contribution Guidelines (optional)
+- [ ] License section (MIT / Proprietary if private)
