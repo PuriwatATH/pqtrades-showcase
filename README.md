@@ -38,17 +38,28 @@ This project highlights my work as a full-stack Quant Developer with a focus on 
 - **Deployment Optimization**  
   Runs on AWS EC2 (t2.micro free-tier) with <10% idle CPU via SWAP memory tuning and service isolation
 
+
+## ✅ Project Outcome
+
+Delivered a full-stack MVP aligned to institutional-grade standards, enabling real-time model testing, execution simulation, and a robust Python backend infrastructure. Demonstrates fluency in system design, modern dev workflows, and real-world quant engineering.
+
 ---
 
-## 🧰 Tech Stack
+## 🧠 Key Skills
 
-| Layer        | Technologies |
-|--------------|--------------|
-| **Backend**  | Python, Django, FastAPI, Celery, PostgreSQL, Redis |
-| **Frontend** | React, Tailwind CSS, WebSocket |
-| **Infrastructure** | Docker (optional), PM2, AWS EC2 (Ubuntu), Git |
-| **Security** | JWT tokens, versioning, token blacklisting, idempotency keys |
-| **Data Handling** | Pandas, NumPy, simulated OHLC streams |
+| Category                      | Tools & Concepts                                                             |
+|------------------------------|------------------------------------------------------------------------------|
+| Programming Languages        | Python, JavaScript (React), SQL (PostgreSQL), Bash                          |
+| Backend Frameworks           | Django, FastAPI, Celery, Redis, Node.js                                     |
+| API & Integration            | RESTful APIs, WebSocket, JWT, Idempotency Middleware                        |
+| Trading Logic & Simulation   | Market/Limit/Stop Orders, SLTP Validation, Margin Model, FIFO Matching      |
+| Real-Time Infrastructure     | WebSocket Streaming, OHLC Generation (M1–D1), Spread Simulation              |
+| Frontend Development         | React, TailwindCSS, Component Routing, Responsive UI                        |
+| Security & Access Control    | Token Versioning, Role-Based Access, Portfolio Scoping, Blacklisting        |
+| Asynchronous Processing      | Redis Pub/Sub, Celery Task Queues, Background Workers                       |
+| System Design & Architecture | Modular Design, Clean Code, Microservices via PM2                          |
+| Deployment & DevOps          | AWS EC2 (t2.micro), SWAP Optimization, Git, PM2                             |
+| Engineering Practices        | Agile Workflow, Version Control, Unit Testing Ready                         |
 
 ---
 
