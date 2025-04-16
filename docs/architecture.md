@@ -13,22 +13,7 @@ It combines modular backend architecture, WebSocket-based streaming, and role-ba
 
 ## 🔄 High-Level Architecture
 
-<pre markdown="1">
-```mermaid
-graph TD
-    A[React Dashboard] --> B[Node.js Gateway]
-    B --> C[Django Backend]
-    C --> C1[Auth / Portfolio / Orders]
-    C --> C2[Token Middleware]
-    C2 --> C3[Idempotency Key Handler]
-    C3 --> C4[SL/TP Validation]
-    C --> D[FastAPI Market Service]
-    D --> D1[WebSocket Server]
-    D1 --> D2[Simulated Bid/Ask Feeds]
-    D2 --> D3[OHLC Aggregator]
-    D3 --> D4[Redis Pub/Sub]
-```
-</pre>
+![Architecture Diagram](./images/architecture-diagram.png)
 ---
 
 ## 🧠 Key Components
