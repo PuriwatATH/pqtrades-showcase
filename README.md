@@ -68,7 +68,9 @@ Delivered a full-stack MVP aligned to institutional-grade standards, enabling re
 ---
 
 ## 🔐 Highlighted Modules
-> ⚠️ **Notice:** This is an active showcase repository currently under documentation and refinement.  
+> ⚠️ **Notice:** This is an active showcase repository currently under documentation and refinement.
+
+📘 System Architecture → [View Architecture Documentation](docs/architecture.md)
 
 ---
 
