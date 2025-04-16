@@ -1,3 +1,5 @@
+> ⬅️ [Back to Project Overview](../README.md)
+
 # 🧩 System Architecture – PQTradePlatform
 
 ## Overview
