@@ -2,102 +2,98 @@
 
 ## Overview
 
-PQTradePlatform is a full-stack trading simulation platform built to emulate the lifecycle of real-time market execution, portfolio session handling, and research infrastructure.
-
-It combines modular backend architecture, WebSocket-based streaming, and role-based frontend dashboards to support:
-- Trader-side execution and management
-- Admin monitoring and PnL tracking
-- Investor (Observer Mode) view-only access
+PQTradePlatform is a full-stack trading simulation platform built to mirror real-world trading environments. It combines:
+- Modular backend logic for order handling and risk enforcement
+- A real-time pricing engine with OHLC/Tick feeds
+- Role-based dashboards (Trader, Admin, Observer)
+- Middleware-protected APIs and asynchronous task orchestration
 
 ---
 
 ## 🔄 High-Level Architecture
 
 ![Architecture Diagram](./images/architecture-diagram.png)
----
-
-## 🧠 Key Components
-
-### 🔐 **Django Backend**
-- Handles authentication, token versioning, portfolio session management
-- All trade order requests (Market, Limit, Stop) are processed here
-- Business logic (SL/TP validation, PnL, margin) is session-aware
-- Interfaces with PostgreSQL for persistent storage
-
-### 🚀 **FastAPI Market Service**
-- Simulates live market data with spread-aware bid/ask ticks
-- Broadcasts OHLC bars across M1–D1 via WebSocket
-- Publishes real-time updates to Redis (Pub/Sub channels)
-
-### 🔌 **WebSocket Integration**
-- WebSocket clients connect to FastAPI for live price feeds
-- Frontend subscribes to symbols/timeframes and receives stream updates
-- Prices are also consumed internally by Django via Redis for validation and execution
-
-### ⚙️ **Celery + Redis Worker**
-- Asynchronous handling of:
-  - SL/TP triggers
-  - Margin checks
-  - Post-trade logging and cleanup
-- Redis also used for live market price caching and broadcast channels
 
 ---
 
-## 🖥️ Frontend SPA (React + TailwindCSS)
+## 🧠 Key Components (Aligned with Diagram)
 
-- Trader Panel: Execute, monitor, and manage open orders
-- Admin Panel: Review system health, user positions, risk metrics
-- Observer Mode: Read-only view of trader performance (no order access)
-
-Real-time updates via WebSocket client, with session token-based routing.
-
----
-
-## 🛠 Deployment Architecture
-
-- Deployed on **AWS EC2 (t2.micro)** with resource tuning
-  - Redis and PostgreSQL run locally or via managed services
-  - PM2 orchestrates services: FastAPI, Django, Celery
-  - SWAP memory used to extend system capability under limited RAM
-- Future-ready for Docker Compose / Kubernetes deployment model
+### 🌐 Nginx Gateway
+- Routes client requests from the React dashboard to either:
+  - **Node.js Gateway** (REST API)
+  - **FastAPI Market Service** (WebSocket)
 
 ---
 
-## 🔐 Security Design
-
-- JWT with session tracking and token versioning
-- Middleware enforces portfolio scoping on every request
-- Idempotency Key prevents accidental order duplication
-- Token blacklist model enables logout/revoke workflows
+### 🔁 Node.js Gateway (API Proxy)
+- Proxies REST requests from the React SPA to the Django backend
+- Handles preliminary validation, logging, and message shaping
 
 ---
 
-## 📈 Scalability Considerations
+### 🧠 Django Backend – Buy-Side Core
 
-- Stateless backend: all session validation handled via token and cache
-- Real-time feeds can be scaled across multiple clients per symbol
-- Pub/Sub architecture allows downstream consumers (dashboard, risk engine, ML modules)
-- Components are modular and microservice-compatible
+#### 🔐 Middleware
+- **Token Management**: JWT validation, blacklist, portfolio scoping
+- **Idempotency Key**: Prevents duplicate orders
+- **Response Handler**: Ensures structured API replies with status and payload
+
+#### 🧾 API Endpoint Modules
+- **Authentication**
+  - `/register/`, `/login/`, `/logout/`, `/protected_route/`
+- **Portfolio Manager**
+  - `/create/`, `/get/`, `/list/`, `/delete/`
+  - `/session/login/`, `/session/detail/`
+- **Orders**
+  - `/execute/`, `/pending/`, `/modify/`, `/close/`, `/cancelled/`
+  - `/active/list`, `/historical/list`
+
+#### ⚙️ Celery Task System
+- **MARKET_TASKS**: SL/TP trigger closures, pending order matching
+- **PORTFOLIO_TASKS**: End-of-day swaps, PnL reconciliation
+- **RISK_TASKS**: Margin validation, protocol enforcement
+
+#### 🗃 Django ORM & Database
+- Models for users, portfolios, positions, and orders
+- Central PostgreSQL database with shared access from Celery
 
 ---
 
-## 🧠 Planned Extensions
+### 📡 FastAPI Market Service – Sell-Side Engine
 
-- Live market integration (Binance, FXCM)
-- AI signal-based execution triggers
-- Strategy backtester module (in sync with historical bars)
-- User tiering: multiple traders, investors, and admin control levels
+#### 🛰 WebSocket Server
+- Handles real-time subscriptions from the frontend
+
+#### 📈 Price Feed Modules
+- `/prices/market/` – Live bid/ask feed
+- `/prices/` – Tick-level updates
+- `/prices/realtime/` – OHLC candles (1s basis)
+- `/prices/historical/` – Delayed historical OHLC bars
 
 ---
 
-## 📎 Related Files
+### 🔁 Redis – Shared Caching & Queue System
+- **Cache Manager**: Stores latest bid/ask, ticks, OHLC data
+- **Beat Scheduler**: Periodic task triggers (bar closing, heartbeat)
+- **Queue Scheduler**: Connects task results back into Celery workflows
 
-- [`websocket_protocol.md`](./websocket_protocol.md) – message format, subscription lifecycle  
-- [`api_reference.md`](./api_reference.md) – endpoint documentation  
-- [`order_lifecycle.md`](./order_lifecycle.md) – order flow from open to close  
-- [`performance.md`](./performance.md) – CPU/latency/load benchmarks  
+---
+
+## ⚙️ Deployment
+
+- Deployed on **AWS EC2 (t2.micro)** with:
+  - PM2 process manager for backend/web services
+  - Redis & PostgreSQL as local services
+  - SWAP tuning and process grouping for efficiency
+
+---
+
+## 🧩 Security & Modularity
+
+- JWT + Session Portfolio → Scoped access and tracking
+- Token Blacklist + Refresh Rotation
+- All modules follow single-responsibility, message-safe structure
 
 ---
 
 _Last updated: April 2025_
-
